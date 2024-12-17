@@ -5,18 +5,28 @@ fun calculararea(lado1: Float,lado2: Float,lado3: Float) :Float {
     return area
 }
 
-fun pedirfloat(msj: String): Float?{
-    val input = null
-    try {
-        print(msj)
-        var input :Float = readln().toFloat()
-    }
+fun pedirfloat(msj: String, min:Int? = null, max: Int? = null): Float{
 
-    catch (e: NumberFormatException) {
-        println("Error: el numero introducido no es valido.")
-        null
-    }
-    return input
+    var numero: Float? = null
+
+    do {
+        print(msj)
+        try {
+            numero = readLine()!!.toFloat()
+
+            if (min != null && max != null && (numero < min && numero > max)) {
+                throw NumberFormatException("El numero tiene que estar entre -> $min <- y -> $max <-")
+            }
+
+        } catch(e: NumberFormatException){
+            println("Error, numero introducido no es valido, intente de nuevo.\n")
+        }
+
+    }while(numero == null)
+
+    return numero
+
+
 }
 
 
